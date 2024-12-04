@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - Programación III</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 5px 0;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .dark-theme .container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .light-theme {
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .light-theme .container {
+            background-color: white;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PROYECTO FINAL - PROGRAMACIÓN III</h1>
+        <p><strong>Nombre:</strong> Elian Hanoys Rodriguez Feliz</p>
+        <p><strong>Matrícula:</strong> 20221042</p>
+        <p><strong>Título del Proyecto:</strong> Practicing Scrum
+        </p>
+        <p><strong>Fecha:</strong> 3/12/2024 </p>
+
+        <button id="btnShowDate">Mostrar Fecha Actual</button>
+        <p id="currentDate" style="margin-top: 15px; font-weight: bold;"></p>
+
+        <button id="btnToggleDarkTheme">Tema Oscuro</button>
+        <button id="btnToggleLightTheme">Tema Claro</button>
+
+        <div>
+            <label for="nameInput">Escribe tu nombre:</label>
+            <input type="text" id="nameInput" placeholder="Ingresa tu nombre">
+            <button id="btnGreet">Saludar</button>
+        </div>
+        <p id="greetingMessage" style="margin-top: 15px; font-style: italic;"></p>
+
+        <div style="margin-top: 20px;">
+            <h2>Calculadora</h2>
+            <input type="number" id="num1" placeholder="Número 1" style="margin-right: 10px;">
+            <input type="number" id="num2" placeholder="Número 2">
+            <div style="margin-top: 10px;">
+                <button id="btnAdd">Sumar</button>
+                <button id="btnSubtract">Restar</button>
+                <button id="btnMultiply">Multiplicar</button>
+                <button id="btnDivide">Dividir</button>
+            </div>
+            <p id="calcResult" style="margin-top: 10px; font-weight: bold;"></p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h2>Generador de números aleatorios</h2>
+            <button id="btnGenerateRandom">Generar Número Aleatorio</button>
+            <p id="randomNumber" style="margin-top: 10px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <script>
+
+        document.getElementById('btnShowDate').addEventListener('click', function() {
+            const date = new Date();
+            const formattedDate = date.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('currentDate').textContent = `Fecha actual: ${formattedDate}`;
+        });
+
+
+        document.getElementById('btnToggleDarkTheme').addEventListener('click', function() {
+            document.body.classList.add('dark-theme');
+            document.body.classList.remove('light-theme');
+        });
+
+
+        document.getElementById('btnToggleLightTheme').addEventListener('click', function() {
+            document.body.classList.add('light-theme');
+            document.body.classList.remove('dark-theme');
+        });
+
+   
+        document.getElementById('btnGreet').addEventListener('click', function() {
+            const name = document.getElementById('nameInput').value;
+            const greetingMessage = name ? `¡Hola, ${name}! Bienvenido al proyecto.` : "Por favor, ingresa tu nombre.";
+            document.getElementById('greetingMessage').textContent = greetingMessage;
+        });
+
+
+        document.getElementById('btnAdd').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const result = num1 + num2;
+            document.getElementById('calcResult').textContent = `Resultado: ${result}`;
+        });
+
+        document.getElementById('btnSubtract').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const result = num1 - num2;
+            document.getElementById('calcResult').textContent = `Resultado: ${result}`;
+        });
+
+        document.getElementById('btnMultiply').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const result = num1 * num2;
+            document.getElementById('calcResult').textContent = `Resultado: ${result}`;
+        });
+
+        document.getElementById('btnDivide').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (num2 !== 0) {
+                const result = num1 / num2;
+                document.getElementById('calcResult').textContent = `Resultado: ${result}`;
+            } else {
+                document.getElementById('calcResult').textContent = "No se puede dividir entre cero.";
+            }
+        });
+
+   
+        document.getElementById('btnGenerateRandom').addEventListener('click', function() {
+            const randomNum = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('randomNumber').textContent = `Número aleatorio: ${randomNum}`;
+        });
+    </script>
+</body>
+</html>
